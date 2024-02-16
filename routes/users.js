@@ -104,9 +104,10 @@ router.post('/tweet', (req, res) => {
 router.get('/tweet', (req, res) => {
 
   Tweet.find()
+  .populate('username')
     .then(data => {
       if (data) {
-        res.json({ result: true, Tweet });
+        res.json({ result: true, tweets: data });
       } else {
         res.json({ result: false, error: 'pas de nouveau message' });
       }
