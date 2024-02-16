@@ -97,5 +97,6 @@ router.post('/tweet', (req, res) => {
   }
 });
 
+//--> router.get('/tweet', (req, res) => { }
 
 module.exports = router;
