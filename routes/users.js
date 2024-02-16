@@ -70,7 +70,7 @@ router.post('/tweet', (req, res) => {
       return res.json({ result: false, error: 'Utilisateur inexistant ou non connecté' });
     }
 
-    // Création d'un nouveau tweet avec l'ID de l'utilisateur connecté
+    // Création d'un nouveau tweet avec l'_ID (via token) de l'utilisateur connecté
    
   User.findOne({token : req.body.token}).then(data => {
 
@@ -80,7 +80,7 @@ router.post('/tweet', (req, res) => {
       liked: 0,
     });
   
-    // Poste et Enregistrement du tweet dans la base de données
+    // Enregistrement du tweet dans la base de données
     
     newTweet.save().then((data) => {
       return res.json({ result: true, tweet: data });
@@ -97,6 +97,32 @@ router.post('/tweet', (req, res) => {
   }
 });
 
-//--> router.get('/tweet', (req, res) => { }
+
+
+//—> récupérer tous les tweets
+
+router.get('/tweet', (req, res) => {
+
+  Tweet.find()
+    .then(data => {
+      if (data) {
+        res.json({ result: true, Tweet });
+      } else {
+        res.json({ result: false, error: 'pas de nouveau message' });
+      }
+    });
+});
+
+
+//--> Effacer un tweet par le biais de la corbeille
+/*
+router.delete('/tweet', (req, res) => {
+ 
+  
+    }
+
+*/
+
+
 
 module.exports = router;
